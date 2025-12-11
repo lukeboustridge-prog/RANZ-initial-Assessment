@@ -202,7 +202,7 @@
         }
         .terms-check-wrapper input { width: 20px; height: 20px; margin-right: 10px; display: block; }
 
-        /* --- LEGISLATION BREAKDOWN (UPDATED) --- */
+        /* --- LEGISLATION BREAKDOWN (FIXED LINKS) --- */
         .leg-block {
             border: 1px solid #e0e0e0;
             border-left: 5px solid var(--ranz-charcoal);
@@ -431,7 +431,7 @@
         var startBtn = document.getElementById('btn-intro-start');
         termsCheck.addEventListener('change', function() { startBtn.disabled = !this.checked; });
 
-        // --- ENRICHED LEGISLATIVE DATA ---
+        // --- ENRICHED LEGISLATIVE DATA (FIXED LINKS) ---
         const explanations = {
             scope: {
                 question: "Scope of Work",
@@ -501,7 +501,7 @@
             supervision: {
                 question: "Supervision Requirements",
                 self: { ref: "LBP Rules", text: "Direct accountability." },
-                check: { ref: "Building Act 2004, Section 7", text: "Meets definition of 'direction and oversight'." },
+                check: { ref: "<a href='https://www.legislation.govt.nz/act/public/2004/0072/latest/DLM306059.html' target='_blank'>Building Act 2004, Section 7</a>", text: "Meets definition of 'direction and oversight'." },
                 remote: { 
                     ref: "<em>Horrack [2024] BPB 26456</em>", 
                     text: "<strong>Supervision Definition:</strong> The Board ruled that 'Remote supervision does not mean NO supervision'. A supervisor must have knowledge of the work and carry out actual inspections. Relying solely on trust is insufficient." 

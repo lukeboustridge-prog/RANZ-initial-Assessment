@@ -182,8 +182,7 @@
         .result-banner { text-align: center; padding: 2rem; color: white; border-radius: 6px; margin-bottom: 2rem; }
         .res-consent { background-color: var(--ranz-red); }
         .res-exempt { background-color: #28a745; }
-        .res-check { background-color: var(--ranz-blue); } /* New blue banner for checks */
-        
+        .res-commercial { background-color: var(--ranz-charcoal); }
         .checklist li { margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #eee; }
         footer { text-align: center; padding: 2rem; font-size: 0.8rem; color: #888; }
         
@@ -269,6 +268,7 @@
         <div class="case-study-box">
             <div class="box-title">Design Changes = No Exemption</div>
             In <em>Newton [2023]</em>, a roofer replaced a dormer but removed parapets. The Board ruled this was <strong>not</strong> "like-for-like". If you change the design, Schedule 1 does not apply.
+            <div class="citation">Newton [2023] BPB CB26223</div>
         </div>
         <p><strong>What is the nature of the work?</strong></p>
         <div class="option-group">
@@ -331,6 +331,23 @@
         <div class="actions">
             <button class="btn btn-back" id="btn-back-p2">Back</button>
             <button class="btn btn-next" id="btn-next-p2">Next Step</button>
+        </div>
+    </div>
+
+    <div class="card" id="stepE0">
+        <h2>Execution: Building Type</h2>
+        <div class="info-box">
+            <div class="box-title">Restricted Building Work</div>
+            RBW rules specifically apply to <strong>residential</strong> buildings (houses and small-to-medium apartments). Commercial work has different supervision rules.
+        </div>
+        <p><strong>Is this a Residential building?</strong></p>
+        <div class="option-group">
+            <label><input type="radio" name="b_type" value="residential"><div class="radio-label"><span class="option-title">Yes (House / Apartment)</span><span class="option-desc">Restricted Building Work rules apply.</span></div></label>
+            <label><input type="radio" name="b_type" value="commercial"><div class="radio-label"><span class="option-title">No (Commercial / Industrial)</span><span class="option-desc">Warehouses, offices, etc.</span></div></label>
+        </div>
+        <div class="actions">
+            <button class="btn btn-back" onclick="showStep('step0')">Back</button>
+            <button class="btn btn-next" id="btn-next-e0">Next Step</button>
         </div>
     </div>
 
@@ -424,14 +441,14 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         
-        var state = { pathway:null, scope:null, complex:null, age:null, consent_status:null, variation:null, discovery:null, supervision:null, completion:null };
+        var state = { pathway:null, scope:null, complex:null, age:null, consent_status:null, b_type:null, variation:null, discovery:null, supervision:null, completion:null };
 
         // Terms Logic
         var termsCheck = document.getElementById('terms-check');
         var startBtn = document.getElementById('btn-intro-start');
         termsCheck.addEventListener('change', function() { startBtn.disabled = !this.checked; });
 
-        // --- EXPLANATION DATA (NO LINKS) ---
+        // --- ENRICHED LEGISLATIVE DATA (NO LINKS) ---
         const explanations = {
             scope: {
                 question: "Scope of Work",
@@ -455,6 +472,12 @@
                 yes: { ref: "Building Act 2004, Section 40", text: "Building work must proceed exactly in accordance with the issued consent." },
                 no_check: { ref: "Corbett-Pearson [2024] BPB 26512", text: "<strong>Negligence Finding:</strong> The Board ruled that the LBP is in the best position to ensure unconsented work does not occur. Failing to verify the consent status before starting is a disciplinary offence." }
             },
+            // NEW SECTION FOR BUILDING TYPE
+            b_type: {
+                question: "Building Type (Residential vs Commercial)",
+                residential: { ref: "Building (Definition of Restricted Building Work) Order 2011", text: "RBW applies to residential housing. Work involving the primary structure or weathertightness of a house must be done by an LBP." },
+                commercial: { ref: "Building Act 2004", text: "Commercial buildings generally do not have 'Restricted Building Work' requirements for structure/weathertightness, meaning an LBP is not legally mandated for the physical work (though often contractually required)." }
+            },
             variation: {
                 question: "Deviations from Plans",
                 yes: { ref: "Building Act 2004, Section 45A & Langdon [2025]", text: "<strong>Section 45A:</strong> Minor variations must be approved by the BCA. In <em>Langdon [2025]</em>, an LBP was fined for using a 'better' method that wasn't on the plans. You cannot deviate without prior approval." },
@@ -476,10 +499,6 @@
                 finished: { ref: "Building Act 2004, Section 88", text: "<strong>Section 88:</strong> Each LBP who carries out RBW must provide a Record of Work to the Owner and the Territorial Authority on completion." },
                 dispute: { ref: "Moyes [2025] BPB 26670", text: "<strong>Case Law:</strong> 'A Record of Work is a statutory requirement, not a negotiable term of a contract.' Withholding it due to payment disputes is a disciplinary offence." },
                 terminated: { ref: "McKinstry [2023] BPB 26342", text: "<strong>Definition of Completion:</strong> The Board clarified that 'Completion' means the date your engagement ended. Even if the roof isn't finished, you must provide a RoW for the work you did complete." }
-            },
-            lbp_general: {
-                question: "General LBP Requirement",
-                standard: { ref: "Building Act 2004, s84 & s88", text: "<strong>Restricted Building Work (RBW):</strong> Residential roofing involving weathertightness is RBW. It must be done or supervised by an LBP, and a Record of Work must be provided." }
             }
         };
 
@@ -497,7 +516,9 @@
             var el = document.querySelector('input[name="pathway"]:checked');
             if(!el) { alert("Please select a pathway."); return; }
             state.pathway = el.value;
-            if(state.pathway === 'planning') showStep('stepP1'); else showStep('stepE1');
+            // Branch: Planning vs Execution
+            if(state.pathway === 'planning') showStep('stepP1'); 
+            else showStep('stepE0'); // Changed from E1 to E0 (Building Type)
         });
 
         // Planning Flow
@@ -536,7 +557,16 @@
         });
 
         // Execution Flow
-        document.getElementById('btn-back-e1').addEventListener('click', function() { showStep('step0'); });
+        // E0: Building Type
+        document.getElementById('btn-next-e0').addEventListener('click', function() {
+            var el = document.querySelector('input[name="b_type"]:checked');
+            if(!el) { alert("Select building type."); return; }
+            state.b_type = el.value;
+            showStep('stepE1');
+        });
+
+        // E1
+        document.getElementById('btn-back-e1').addEventListener('click', function() { showStep('stepE0'); }); // Back to E0 now
         document.getElementById('btn-next-e1').addEventListener('click', function() {
             var el = document.querySelector('input[name="variation"]:checked');
             if(!el) { alert("Answer variation."); return; }
@@ -572,8 +602,6 @@
             var html = "";
             keys.forEach(function(k) {
                 var val = state[k];
-                if(k === 'lbp_general') val = 'standard'; // Special case for generic msg
-
                 if(val && explanations[k] && explanations[k][val]) {
                     var d = explanations[k][val];
                     html += `<div class="leg-block"><div class="leg-question">${explanations[k].question}</div><div class="leg-ref">${d.ref}</div><div class="leg-explain">${d.text}</div></div>`;
@@ -627,16 +655,26 @@
             var reasons = [], warnings = [];
 
             // BANNER LOGIC FOR EXECUTION
-            if(state.discovery === 'structural') {
-                banner.className = "result-banner res-consent";
-                banner.innerHTML = "<h1>LBP REQUIRED</h1><p>Structural Work Discovered</p>";
+            if (state.b_type === 'commercial') {
+                banner.className = "result-banner res-commercial";
+                banner.innerHTML = "<h1>COMMERCIAL: LBP NOT MANDATED</h1><p>Restricted Building Work applies to Residential only.</p>";
             } else {
-                banner.className = "result-banner res-check";
-                banner.innerHTML = "<h1>LBP & CONSENT REMINDER</h1><p>Check Status Below</p>";
+                // Residential Logic
+                if (state.discovery === 'structural') {
+                    banner.className = "result-banner res-consent";
+                    banner.innerHTML = "<h1>LBP REQUIRED</h1><p>Structural Work Discovered (RBW)</p>";
+                } else {
+                    banner.className = "result-banner res-consent"; // Default Red for Resi
+                    banner.innerHTML = "<h1>LBP REQUIRED</h1><p>Residential Roofing is Restricted Building Work</p>";
+                }
             }
 
-            // CHECKLIST ITEMS
-            reasons.push("<strong>LBP Rule:</strong> If this work involves the primary structure or weathertightness of a residential home, it is <strong>Restricted Building Work</strong> and requires an LBP.");
+            // CHECKLIST
+            if (state.b_type === 'residential') {
+                reasons.push("<strong>Residential Rule:</strong> This work is Restricted Building Work (RBW). It must be supervised by an LBP.");
+            } else {
+                reasons.push("<strong>Commercial Rule:</strong> While LBP is not legally mandated for the physical work, contractual obligations and competency requirements still apply.");
+            }
 
             if (state.variation === 'yes') {
                 warnings.push('<div class="case-study-box"><div class="box-title">STOP: Variation</div>Unapproved changes = Fines (<em>Langdon</em>). Apply for Minor Variation (Form 45A).</div>');
@@ -650,17 +688,18 @@
             }
             if (state.completion === 'dispute') {
                 warnings.push('<div class="case-study-box"><div class="box-title">Issue RoW Now</div>Do not withhold RoW for payment (<em>Moyes</em>).</div>');
-                reasons.push("<strong>Action:</strong> Issue Record of Work immediately.");
+                if(state.b_type === 'residential') reasons.push("<strong>Action:</strong> Issue Record of Work immediately.");
             } else if (state.completion === 'terminated') {
-                reasons.push("<strong>Action:</strong> Issue RoW for work done so far (<em>McKinstry</em>).");
+                 if(state.b_type === 'residential') reasons.push("<strong>Action:</strong> Issue RoW for work done so far (<em>McKinstry</em>).");
             }
 
-            reasons.push("<strong>General:</strong> Send RoW to Owner AND Council.");
+            if (state.b_type === 'residential') {
+                reasons.push("<strong>General:</strong> Send RoW to Owner AND Council.");
+            }
+
             list.innerHTML = reasons.map(r => "<li>"+r+"</li>").join('');
             warnDiv.innerHTML = warnings.join('');
-            
-            // Add 'lbp_general' to render list so the rule appears in breakdown
-            renderLegislation(['variation', 'discovery', 'supervision', 'completion', 'lbp_general']);
+            renderLegislation(['b_type', 'variation', 'discovery', 'supervision', 'completion']);
         }
     });
 </script>

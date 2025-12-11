@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RANZ Compliance Wizard</title>
+    <title>RANZ Compliance Master Tool</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -27,7 +27,6 @@
             flex-direction: column;
         }
 
-        /* --- HEADER --- */
         header {
             background-color: var(--ranz-charcoal);
             color: white;
@@ -73,7 +72,6 @@
             max-width: 60%;
         }
 
-        /* --- CONTAINER --- */
         .container {
             max-width: 900px;
             margin: -50px auto 2rem;
@@ -110,8 +108,7 @@
             margin-bottom: 1.5rem;
         }
 
-        /* --- BOX STYLES --- */
-        .info-box, .warning-box, .case-study-box, .intro-box {
+        .info-box, .warning-box, .case-study-box, .intro-box, .tech-alert {
             padding: 1.5rem;
             border-radius: 4px;
             margin-bottom: 1.5rem;
@@ -122,6 +119,7 @@
         .info-box { background-color: #eef4f8; border-left: 5px solid var(--ranz-blue); }
         .warning-box { background-color: #fff3cd; border-left: 5px solid var(--ranz-yellow); color: #856404; }
         .case-study-box { background-color: #fff0f0; border-left: 5px solid var(--ranz-red); color: #721c24; }
+        .tech-alert { background-color: #e3f2fd; border-left: 5px solid #2196f3; color: #0d47a1; }
 
         .box-title {
             font-weight: 800;
@@ -133,6 +131,7 @@
         }
 
         .case-study-box .box-title::before { content: "⚖️ CASE LAW ALERT: "; margin-right: 5px; }
+        .tech-alert .box-title::before { content: "🛠️ TECHNICAL ALERT: "; margin-right: 5px; }
 
         .citation {
             font-size: 0.8rem;
@@ -143,36 +142,6 @@
             padding-top: 5px;
         }
 
-        /* --- TERMS BOX --- */
-        .terms-container {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            padding: 1rem;
-            font-size: 0.85rem;
-            color: #555;
-            height: 150px;
-            overflow-y: auto;
-            margin-bottom: 1rem;
-            border-radius: 4px;
-        }
-
-        .terms-check-wrapper {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background: #eef4f8;
-            border-radius: 4px;
-        }
-
-        .terms-check-wrapper input {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-            display: block; /* Override hidden default */
-        }
-
-        /* --- LEGISLATION BREAKDOWN STYLES --- */
         .leg-block {
             border: 1px solid #eee;
             border-left: 4px solid var(--ranz-silver);
@@ -185,7 +154,6 @@
         .leg-ref { font-weight: 600; color: var(--ranz-charcoal); font-size: 0.95rem; }
         .leg-explain { font-size: 0.9rem; color: #555; margin-top: 0.5rem; }
 
-        /* --- INPUTS --- */
         .option-group { display: grid; gap: 1rem; }
 
         .radio-label {
@@ -208,7 +176,6 @@
         .option-title { font-weight: 700; display: block; margin-bottom: 5px; }
         .option-desc { font-weight: 300; font-size: 0.9rem; color: #666; }
 
-        /* --- BUTTONS --- */
         .actions { margin-top: 2rem; display: flex; gap: 1rem; }
         .btn {
             padding: 1rem 2rem;
@@ -227,12 +194,28 @@
         .btn-back { background-color: #e9ecef; color: #333; }
         .btn-back:hover { background-color: #dbe2e8; }
 
-        /* --- RESULTS --- */
         .result-banner { text-align: center; padding: 2rem; color: white; border-radius: 6px; margin-bottom: 2rem; }
         .res-consent { background-color: var(--ranz-red); }
         .res-exempt { background-color: #28a745; }
         .checklist li { margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #eee; }
         footer { text-align: center; padding: 2rem; font-size: 0.8rem; color: #888; }
+        
+        /* Terms Box */
+        .terms-container {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            font-size: 0.85rem;
+            color: #555;
+            height: 150px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+        .terms-check-wrapper {
+            display: flex; align-items: center; margin-bottom: 1.5rem; padding: 1rem; background: #eef4f8; border-radius: 4px;
+        }
+        .terms-check-wrapper input { width: 20px; height: 20px; margin-right: 10px; display: block; }
     </style>
 </head>
 <body>
@@ -249,25 +232,20 @@
 
     <div class="card active" id="stepIntro">
         <h2>Welcome to the RANZ Compliance Wizard</h2>
-        
         <div class="intro-box">
             <p>This tool helps Roofers, LBPs, and Homeowners determine their obligations under the <strong>Building Act 2004</strong> and the <strong>LBP Rules</strong>.</p>
-            <p>Throughout this tool, you will see <strong>Case Law Alerts</strong> based on real, upheld complaints from the <strong>Building Practitioners Board (BPB)</strong>.</p>
+            <p>Throughout this tool, you will see <strong>Case Law Alerts</strong> based on real, upheld complaints.</p>
         </div>
-
         <h3>Terms & Conditions of Use</h3>
         <div class="terms-container">
-            <p><strong>1. No Data Storage or Verification:</strong> The Roofing Association of New Zealand (RANZ) does not see, store, keep, endorse, or verify any of the information you enter into this tool. All data is processed locally on your device.</p>
-            <p><strong>2. Membership Status:</strong> Usage of this tool does not imply that the user is a member of RANZ. Just because someone is using this application does not mean they are a RANZ member. To verify membership, you must check the official directory at <a href="https://ranz.co.nz" target="_blank">ranz.co.nz</a>.</p>
-            <p><strong>3. Not Legal Advice:</strong> This tool is a guide based on the Building Act 2004 and BPB decisions. It is not a substitute for professional legal advice or specific guidance from your local Building Consent Authority (BCA).</p>
-            <p><strong>4. Liability:</strong> RANZ accepts no liability for actions taken based on the outputs of this tool.</p>
+            <p><strong>1. No Data Storage or Verification:</strong> RANZ does not see, store, or verify information entered here.</p>
+            <p><strong>2. Membership Status:</strong> Usage does not imply RANZ membership. Verify at ranz.co.nz.</p>
+            <p><strong>3. Not Legal Advice:</strong> This is a guide based on the Building Act 2004. Consult your BCA for specific rulings.</p>
         </div>
-
         <div class="terms-check-wrapper">
             <input type="checkbox" id="terms-check">
-            <label for="terms-check"><strong>I have read and accept these Terms & Conditions.</strong><br><span style="font-size:0.85rem; color:#666;">I understand RANZ does not verify this data and usage does not prove membership.</span></label>
+            <label for="terms-check"><strong>I have read and accept these Terms & Conditions.</strong></label>
         </div>
-
         <div class="actions">
             <button class="btn btn-next" id="btn-intro-start" disabled>Start Assessment</button>
         </div>
@@ -280,14 +258,14 @@
                 <input type="radio" name="pathway" value="planning">
                 <div class="radio-label">
                     <span class="option-title">A. Planning & Pricing</span>
-                    <span class="option-desc">"I am planning a job. Do I need a Building Consent? Do I need an LBP?"</span>
+                    <span class="option-desc">"I am planning a job. Do I need a Consent? Are there technical risks?"</span>
                 </div>
             </label>
             <label>
                 <input type="radio" name="pathway" value="execution">
                 <div class="radio-label">
                     <span class="option-title">B. Doing the Work / Issues</span>
-                    <span class="option-desc">"I am on site, making changes, supervising staff, or have a dispute."</span>
+                    <span class="option-desc">"I am on site, found a problem, making changes, or have a dispute."</span>
                 </div>
             </label>
         </div>
@@ -301,33 +279,13 @@
         <h2>Step 1: The Job Scope</h2>
         <div class="case-study-box">
             <div class="box-title">Design Changes = No Exemption</div>
-            In <em>Newton [2023]</em>, a roofer replaced a dormer but removed the parapets. The Board ruled this was <strong>not</strong> "like-for-like" replacement under Schedule 1. If you change the design, Schedule 1 does not apply.
-            <div class="citation">Newton [2023] BPB CB26223</div>
+            In <em>Newton [2023]</em>, a roofer replaced a dormer but removed parapets. The Board ruled this was <strong>not</strong> "like-for-like". If you change the design, Schedule 1 does not apply.
         </div>
-
         <p><strong>What is the nature of the work?</strong></p>
         <div class="option-group">
-            <label>
-                <input type="radio" name="scope" value="new">
-                <div class="radio-label">
-                    <span class="option-title">A. New Build or Extension</span>
-                    <span class="option-desc">New footprint or structural extension.</span>
-                </div>
-            </label>
-            <label>
-                <input type="radio" name="scope" value="replace_same">
-                <div class="radio-label">
-                    <span class="option-title">B. Like-for-Like Replacement</span>
-                    <span class="option-desc">Replacing materials in the <strong>same position</strong> with <strong>comparable</strong> components.</span>
-                </div>
-            </label>
-            <label>
-                <input type="radio" name="scope" value="replace_change">
-                <div class="radio-label">
-                    <span class="option-title">C. Replacement with Design Changes</span>
-                    <span class="option-desc">e.g., Removing parapets, changing roof pitch, changing flashings profiles.</span>
-                </div>
-            </label>
+            <label><input type="radio" name="scope" value="new"><div class="radio-label"><span class="option-title">A. New Build or Extension</span><span class="option-desc">New footprint or structural extension.</span></div></label>
+            <label><input type="radio" name="scope" value="replace_same"><div class="radio-label"><span class="option-title">B. Like-for-Like Replacement</span><span class="option-desc">Same position, comparable materials.</span></div></label>
+            <label><input type="radio" name="scope" value="replace_change"><div class="radio-label"><span class="option-title">C. Replacement with Design Changes</span><span class="option-desc">e.g. Removing parapets, changing pitch.</span></div></label>
         </div>
         <div class="actions">
             <button class="btn btn-back" id="btn-back-p1">Back</button>
@@ -335,29 +293,34 @@
         </div>
     </div>
 
-    <div class="card" id="stepP1_Age">
-        <h2>Step 1b: Age & Durability</h2>
-        <div class="info-box">
-            <div class="box-title">The 15-Year Rule (Durability)</div>
-            Under <strong>Schedule 1</strong>, a repair is NOT exempt if the component has failed to satisfy the Building Code durability provisions (Clause B2) (usually 15 years for roofing).
+    <div class="card" id="stepP1_Complex">
+        <h2>Step 1b: Complex Scenarios</h2>
+        <div class="tech-alert">
+            <div class="box-title">Grey Areas</div>
+            Some jobs look like "replacement" but trigger Code issues (E1/E2/H1).
         </div>
+        <p><strong>Does the job involve any of these specific scenarios?</strong></p>
+        <div class="option-group">
+            <label><input type="radio" name="complex" value="gutter"><div class="radio-label"><span class="option-title">Internal Gutter -> External Conversion</span><span class="option-desc">Changing drainage system design.</span></div></label>
+            <label><input type="radio" name="complex" value="skillion"><div class="radio-label"><span class="option-title">Skillion Roof (No Cavity)</span><span class="option-desc">Re-roofing a skillion, potentially adding vents.</span></div></label>
+            <label><input type="radio" name="complex" value="none"><div class="radio-label"><span class="option-title">None of the above</span><span class="option-desc">Standard re-roof or new build.</span></div></label>
+        </div>
+        <div class="actions">
+            <button class="btn btn-back" id="btn-back-complex">Back</button>
+            <button class="btn btn-next" id="btn-next-complex">Next Step</button>
+        </div>
+    </div>
 
+    <div class="card" id="stepP1_Age">
+        <h2>Step 1c: Age & Durability</h2>
+        <div class="info-box">
+            <div class="box-title">The 15-Year Rule</div>
+            Exemption is EXCLUDED if the component failed before its 15-year durability requirement (Clause B2).
+        </div>
         <p><strong>How old is the current roof?</strong></p>
         <div class="option-group">
-            <label>
-                <input type="radio" name="age" value="old">
-                <div class="radio-label">
-                    <span class="option-title">Over 15 Years Old</span>
-                    <span class="option-desc">Normal end of life / Maintenance.</span>
-                </div>
-            </label>
-            <label>
-                <input type="radio" name="age" value="young">
-                <div class="radio-label">
-                    <span class="option-title">Under 15 Years Old</span>
-                    <span class="option-desc">Premature failure (Leaking, rusting early).</span>
-                </div>
-            </label>
+            <label><input type="radio" name="age" value="old"><div class="radio-label"><span class="option-title">Over 15 Years Old</span><span class="option-desc">Normal end of life.</span></div></label>
+            <label><input type="radio" name="age" value="young"><div class="radio-label"><span class="option-title">Under 15 Years Old</span><span class="option-desc">Premature failure.</span></div></label>
         </div>
         <div class="actions">
             <button class="btn btn-back" id="btn-back-age">Back</button>
@@ -369,26 +332,12 @@
         <h2>Step 2: Consent Status</h2>
         <div class="case-study-box">
             <div class="box-title">Duty to Check</div>
-            In <em>Corbett-Pearson [2024]</em>, a roofer assumed a consent was in place but didn't check. The Board ruled the LBP is in the best position to stop unconsented work and failing to check is negligent.
-            <div class="citation">Corbett-Pearson [2024] BPB 26512</div>
+            In <em>Corbett-Pearson [2024]</em>, failing to check for a consent before starting was deemed negligence by the Board.
         </div>
-
-        <p><strong>Has a Building Consent been issued for this work?</strong></p>
+        <p><strong>Has a Consent been issued?</strong></p>
         <div class="option-group">
-            <label>
-                <input type="radio" name="consent_status" value="yes">
-                <div class="radio-label">
-                    <span class="option-title">Yes, Consent Issued</span>
-                    <span class="option-desc">I have seen the stamped plans.</span>
-                </div>
-            </label>
-            <label>
-                <input type="radio" name="consent_status" value="no_check">
-                <div class="radio-label">
-                    <span class="option-title">Unsure / Not Confirmed</span>
-                    <span class="option-desc">I assume it's exempt or the builder handled it, but I haven't verified.</span>
-                </div>
-            </label>
+            <label><input type="radio" name="consent_status" value="yes"><div class="radio-label"><span class="option-title">Yes, Consent Issued</span></div></label>
+            <label><input type="radio" name="consent_status" value="no_check"><div class="radio-label"><span class="option-title">Unsure / Not Confirmed</span></div></label>
         </div>
         <div class="actions">
             <button class="btn btn-back" id="btn-back-p2">Back</button>
@@ -398,30 +347,14 @@
 
     <div class="card" id="stepE1">
         <h2>Execution: Making Changes</h2>
-        
         <div class="case-study-box">
             <div class="box-title">"My way is better" Trap</div>
-            In <em>Langdon [2025]</em>, a roofer used a "better" flashing method than the plan but didn't get approval first. He was fined $1,500.<br><br>
-            In <em>Smith [2023]</em>, a roofer changed back-tray flashings to cricket flashings because the client "didn't like the look". He was fined $2,000.
-            <div class="citation">Langdon [2025] BPB 26658 & Smith [2023] BPB CB26009</div>
+            In <em>Langdon [2025]</em>, a roofer used a "better" method than the plan but didn't get approval first. He was fined $1,500.
         </div>
-
-        <p><strong>Are you deviating from the Consented Plans?</strong></p>
+        <p><strong>Are you deviating from the Plans?</strong></p>
         <div class="option-group">
-            <label>
-                <input type="radio" name="variation" value="yes">
-                <div class="radio-label">
-                    <span class="option-title">Yes</span>
-                    <span class="option-desc">Changing flashings, profiles, or details (even if client asked or it's better).</span>
-                </div>
-            </label>
-            <label>
-                <input type="radio" name="variation" value="no">
-                <div class="radio-label">
-                    <span class="option-title">No</span>
-                    <span class="option-desc">I am following the plans exactly.</span>
-                </div>
-            </label>
+            <label><input type="radio" name="variation" value="yes"><div class="radio-label"><span class="option-title">Yes</span><span class="option-desc">Changing flashings, profiles, or details.</span></div></label>
+            <label><input type="radio" name="variation" value="no"><div class="radio-label"><span class="option-title">No</span></div></label>
         </div>
         <div class="actions">
             <button class="btn btn-back" id="btn-back-e1">Back</button>
@@ -429,37 +362,34 @@
         </div>
     </div>
 
+    <div class="card" id="stepE1_Discovery">
+        <h2>Execution: Unforeseen Discovery</h2>
+        <div class="tech-alert">
+            <div class="box-title">Structural Upgrades</div>
+            If you uncover non-compliant structure (e.g. old purlins/ply), you cannot simply cover it up.
+        </div>
+        <p><strong>Have you found non-compliant or damaged structure?</strong></p>
+        <div class="option-group">
+            <label><input type="radio" name="discovery" value="structural"><div class="radio-label"><span class="option-title">Yes (Rotten timber, wrong fixings, old ply)</span><span class="option-desc">"I need to replace substrate/purlins."</span></div></label>
+            <label><input type="radio" name="discovery" value="none"><div class="radio-label"><span class="option-title">No / Minor issues only</span></div></label>
+        </div>
+        <div class="actions">
+            <button class="btn btn-back" id="btn-back-discovery">Back</button>
+            <button class="btn btn-next" id="btn-next-discovery">Next Step</button>
+        </div>
+    </div>
+
     <div class="card" id="stepE2">
         <h2>Execution: Supervision</h2>
         <div class="case-study-box">
             <div class="box-title">Remote Supervision</div>
-            In <em>Horrack [2024]</em>, an LBP supervised remotely but never physically checked the work. The Board ruled "Remote supervision does not mean NO supervision". You must physically inspect restricted building work.
-            <div class="citation">Horrack [2024] BPB 26456</div>
+            In <em>Horrack [2024]</em>, the Board ruled "Remote supervision does not mean NO supervision". You must physically inspect restricted building work.
         </div>
-
         <p><strong>How are you supervising this job?</strong></p>
         <div class="option-group">
-            <label>
-                <input type="radio" name="supervision" value="self">
-                <div class="radio-label">
-                    <span class="option-title">I am doing it myself</span>
-                    <span class="option-desc">And I hold the correct Licence Class.</span>
-                </div>
-            </label>
-            <label>
-                <input type="radio" name="supervision" value="check">
-                <div class="radio-label">
-                    <span class="option-title">Supervising others (Physical Checks)</span>
-                    <span class="option-desc">I inspect the work at key stages.</span>
-                </div>
-            </label>
-            <label>
-                <input type="radio" name="supervision" value="remote">
-                <div class="radio-label">
-                    <span class="option-title">Remote / No Inspection</span>
-                    <span class="option-desc">I trust the guys, I won't be visiting the site much.</span>
-                </div>
-            </label>
+            <label><input type="radio" name="supervision" value="self"><div class="radio-label"><span class="option-title">I am doing it myself</span></div></label>
+            <label><input type="radio" name="supervision" value="check"><div class="radio-label"><span class="option-title">Supervising others (Physical Checks)</span></div></label>
+            <label><input type="radio" name="supervision" value="remote"><div class="radio-label"><span class="option-title">Remote / No Inspection</span></div></label>
         </div>
         <div class="actions">
             <button class="btn btn-back" id="btn-back-e2">Back</button>
@@ -468,40 +398,16 @@
     </div>
 
     <div class="card" id="stepE3">
-        <h2>Execution: Disputes & Completion</h2>
-        
+        <h2>Execution: Completion</h2>
         <div class="warning-box">
             <div class="box-title">Withholding Paperwork</div>
-            <ul>
-                <li><strong>Moyes [2025]:</strong> Withholding a RoW because of unpaid invoices is a disciplinary offence.</li>
-                <li><strong>McKinstry [2023]:</strong> If you walk off a job, "Completion" means the date your engagement ended. You MUST provide a RoW for what you did.</li>
-                <li><strong>Bogue [2024]:</strong> Even if you are trespassed/kicked off, you must provide a RoW for work done.</li>
-            </ul>
+            In <em>Moyes [2025]</em>, an LBP was fined for withholding a Record of Work due to unpaid invoices.
         </div>
-
         <p><strong>What is the job status?</strong></p>
         <div class="option-group">
-            <label>
-                <input type="radio" name="completion" value="finished">
-                <div class="radio-label">
-                    <span class="option-title">Job Completed Normally</span>
-                    <span class="option-desc">Work is done.</span>
-                </div>
-            </label>
-            <label>
-                <input type="radio" name="completion" value="dispute">
-                <div class="radio-label">
-                    <span class="option-title">Dispute / Payment Issue</span>
-                    <span class="option-desc">I want to withhold the RoW until paid.</span>
-                </div>
-            </label>
-            <label>
-                <input type="radio" name="completion" value="terminated">
-                <div class="radio-label">
-                    <span class="option-title">Contract Terminated / Walked Off</span>
-                    <span class="option-desc">I left the site before finishing the roof.</span>
-                </div>
-            </label>
+            <label><input type="radio" name="completion" value="finished"><div class="radio-label"><span class="option-title">Job Completed Normally</span></div></label>
+            <label><input type="radio" name="completion" value="dispute"><div class="radio-label"><span class="option-title">Dispute / Payment Issue</span></div></label>
+            <label><input type="radio" name="completion" value="terminated"><div class="radio-label"><span class="option-title">Contract Terminated / Walked Off</span></div></label>
         </div>
         <div class="actions">
             <button class="btn btn-back" id="btn-back-e3">Back</button>
@@ -511,18 +417,14 @@
 
     <div class="card" id="stepResults">
         <div id="result-banner" class="result-banner"></div>
-        
         <h3>Critical Compliance Checklist:</h3>
         <ul class="checklist" id="final-checklist"></ul>
-        
         <div id="warnings-section" style="margin-top: 2rem;"></div>
-
         <div style="margin-top: 3rem; border-top: 2px solid #eee; padding-top: 2rem;">
             <h3>Legislation & Rules Breakdown</h3>
-            <p style="margin-bottom:1rem; font-size:0.9rem; color:#666;">Explanation of the questions asked based on the Building Act 2004 and BPB Case Law.</p>
+            <p style="margin-bottom:1rem; font-size:0.9rem; color:#666;">Explanation of your answers based on the Building Act 2004 and BPB Case Law.</p>
             <div id="legislation-breakdown"></div>
         </div>
-
         <button class="btn btn-back" style="width:100%; margin-top:2rem; background:#333; color:white;" onclick="location.reload()">Start New Assessment</button>
     </div>
 
@@ -532,102 +434,55 @@
     document.addEventListener('DOMContentLoaded', function() {
         
         var state = {
-            pathway: null,
-            scope: null,
-            age: null,
-            consent_status: null,
-            variation: null,
-            supervision: null,
-            completion: null
+            pathway: null, scope: null, complex: null, age: null, consent_status: null,
+            variation: null, discovery: null, supervision: null, completion: null
         };
 
-        // --- TERMS & CONDITIONS CHECKBOX LOGIC ---
+        // Terms Logic
         var termsCheck = document.getElementById('terms-check');
         var startBtn = document.getElementById('btn-intro-start');
+        termsCheck.addEventListener('change', function() { startBtn.disabled = !this.checked; });
 
-        termsCheck.addEventListener('change', function() {
-            startBtn.disabled = !this.checked;
-        });
-
-        // --- EXPLANATION DATA ---
+        // Explanation Data
         const explanations = {
             scope: {
-                question: "Scope of Work",
-                new: {
-                    ref: "Building Act 2004, Section 40",
-                    text: "Section 40 states that a person must not carry out building work except in accordance with a building consent. New builds generally do not fall under Schedule 1 Exemptions."
-                },
-                replace_same: {
-                    ref: "Building Act 2004, Schedule 1 (Part 1, 1)",
-                    text: "Exemption 1 covers 'General repair, maintenance, and replacement'. It only applies if you use comparable materials in the same position."
-                },
-                replace_change: {
-                    ref: "Building Act 2004, Schedule 1 (Limitations) & Newton [2023]",
-                    text: "In <em>Newton [2023]</em>, the Board ruled that changing the design (e.g. removing parapets) means the work is no longer 'comparable replacement'. Therefore, the Schedule 1 exemption does not apply, and a Consent is required."
-                }
+                question: "Scope",
+                new: { ref: "Building Act 2004, s40", text: "New builds generally require consent." },
+                replace_same: { ref: "Schedule 1 (Exemption 1)", text: "Exempt if comparable materials used." },
+                replace_change: { ref: "Newton [2023]", text: "Design changes (e.g. removing parapets) void exemptions." }
+            },
+            complex: {
+                question: "Complex Scenario",
+                gutter: { ref: "Building Code E1/E2", text: "Internal to External gutter conversion is a design change affecting drainage. Rarely 'Like-for-Like'." },
+                skillion: { ref: "Building Code H1/E3", text: "Adding vents is a design change. Not adding them risks condensation. High risk area." },
+                none: { ref: "N/A", text: "Standard scope." }
             },
             age: {
-                question: "Roof Age (The 15-Year Rule)",
-                young: {
-                    ref: "Building Act 2004, Schedule 1, Part 1, 1(a)(ii)",
-                    text: "Schedule 1 specifically EXCLUDES exemption if the component has failed to satisfy the Building Code durability provisions (Clause B2) (15 years). If it fails early, a consent is required to investigate why."
-                },
-                old: {
-                    ref: "Building Act 2004, Schedule 1",
-                    text: "Because the roof exceeded its 15-year durability life, it can be replaced as 'Maintenance' under Schedule 1, provided materials are comparable."
-                }
+                question: "15-Year Rule",
+                young: { ref: "Schedule 1, Clause 1(a)(ii)", text: "No exemption if durability failed <15 years." },
+                old: { ref: "Schedule 1", text: "Likely maintenance exemption." }
+            },
+            discovery: {
+                question: "Unforeseen Structure",
+                structural: { ref: "Building Act s112 & RBW", text: "Replacing purlins/substrate is Restricted Building Work. New work must meet current code (e.g. H3.2/Stainless), not old code." },
+                none: { ref: "N/A", text: "No structural issues." }
             },
             consent_status: {
-                question: "Checking for Consent",
-                yes: {
-                    ref: "Building Act 2004, Section 40",
-                    text: "You have verified a consent exists. You must now ensure all work complies strictly with that consent."
-                },
-                no_check: {
-                    ref: "Corbett-Pearson [2024] BPB 26512",
-                    text: "The Board ruled that the LBP is in the best position to ensure unconsented work does not occur. Failing to check for a consent before starting work is considered negligence."
-                }
+                question: "Consent Check",
+                no_check: { ref: "Corbett-Pearson [2024]", text: "Failing to check for consent is negligence." }
             },
             variation: {
-                question: "Deviations from Plans",
-                yes: {
-                    ref: "Building Act 2004, Section 45A & Langdon [2025]",
-                    text: "Section 45A requires Minor Variations to be approved by the BCA. In <em>Langdon [2025]</em>, an LBP was fined for using a 'better' method that wasn't on the plans. You cannot deviate without prior approval."
-                },
-                no: {
-                    ref: "Building Act 2004, Section 40",
-                    text: "Work must be carried out in accordance with the building consent."
-                }
+                question: "Variations",
+                yes: { ref: "Langdon [2025]", text: "You cannot deviate without Form 45A approval." }
             },
             supervision: {
                 question: "Supervision",
-                self: {
-                    ref: "LBP Rules 2007",
-                    text: "As an LBP doing the work yourself, you are directly accountable for its compliance."
-                },
-                check: {
-                    ref: "Building Act 2004, Section 7 (Definition of Supervise)",
-                    text: "Supervision requires 'control or direction and oversight'. Physical checks ensure you meet this definition."
-                },
-                remote: {
-                    ref: "Horrack [2024] BPB 26456",
-                    text: "In <em>Horrack</em>, the Board ruled that 'Remote supervision does not mean NO supervision'. A supervisor must have knowledge of the work and carry out actual inspections. Relying solely on trust is insufficient."
-                }
+                remote: { ref: "Horrack [2024]", text: "Remote supervision requires physical inspection." }
             },
             completion: {
-                question: "Completion & Record of Work",
-                finished: {
-                    ref: "Building Act 2004, Section 88",
-                    text: "Each LBP who carries out RBW must provide a Record of Work to the Owner and the Territorial Authority on completion."
-                },
-                dispute: {
-                    ref: "Moyes [2025] BPB 26670",
-                    text: "The Board ruled: 'A Record of Work is a statutory requirement, not a negotiable term of a contract.' Withholding it due to payment disputes is a disciplinary offence."
-                },
-                terminated: {
-                    ref: "McKinstry [2023] BPB 26342",
-                    text: "In <em>McKinstry</em>, the Board clarified that 'Completion' means the date your engagement ended. Even if the roof isn't finished, you must provide a RoW for the work you did complete."
-                }
+                question: "Completion",
+                dispute: { ref: "Moyes [2025]", text: "Withholding RoW is a disciplinary offence." },
+                terminated: { ref: "McKinstry [2023]", text: "Completion means when your contract ended." }
             }
         };
 
@@ -638,8 +493,7 @@
             if(target) { target.classList.add('active'); target.scrollIntoView({ behavior: 'smooth' }); }
         }
 
-        // --- NAVIGATION HANDLERS ---
-
+        // NAVIGATION
         document.getElementById('btn-intro-start').addEventListener('click', function() { showStep('step0'); });
         document.getElementById('btn-back-0').addEventListener('click', function() { showStep('stepIntro'); });
         
@@ -647,183 +501,162 @@
             var el = document.querySelector('input[name="pathway"]:checked');
             if(!el) { alert("Please select a pathway."); return; }
             state.pathway = el.value;
-            if(state.pathway === 'planning') showStep('stepP1');
-            else showStep('stepE1');
+            if(state.pathway === 'planning') showStep('stepP1'); else showStep('stepE1');
         });
 
-        // P1: Scope
+        // Planning Flow
         document.getElementById('btn-back-p1').addEventListener('click', function() { showStep('step0'); });
         document.getElementById('btn-next-p1').addEventListener('click', function() {
             var el = document.querySelector('input[name="scope"]:checked');
-            if(!el) { alert("Please select a scope."); return; }
+            if(!el) { alert("Select scope."); return; }
             state.scope = el.value;
-            
-            // Logic for next step
-            if(state.scope === 'replace_same') {
-                showStep('stepP1_Age'); // Go to Age Check
-            } else {
-                showStep('stepP2'); // Go to Consent Check
-            }
+            // Always ask complex questions now
+            showStep('stepP1_Complex');
         });
 
-        // P1-B: Age (Added Step)
-        document.getElementById('btn-back-age').addEventListener('click', function() { showStep('stepP1'); });
+        document.getElementById('btn-back-complex').addEventListener('click', function() { showStep('stepP1'); });
+        document.getElementById('btn-next-complex').addEventListener('click', function() {
+            var el = document.querySelector('input[name="complex"]:checked');
+            if(!el) { alert("Select option."); return; }
+            state.complex = el.value;
+            
+            if(state.scope === 'replace_same') showStep('stepP1_Age'); else showStep('stepP2');
+        });
+
+        document.getElementById('btn-back-age').addEventListener('click', function() { showStep('stepP1_Complex'); });
         document.getElementById('btn-next-age').addEventListener('click', function() {
             var el = document.querySelector('input[name="age"]:checked');
-            if(!el) { alert("Please select age."); return; }
+            if(!el) { alert("Select age."); return; }
             state.age = el.value;
-            // After age check, we still technically check consent status or go to results. 
-            // Let's go to Consent Check to be consistent with Corbett-Pearson ruling.
             showStep('stepP2');
         });
 
-        // P2: Consent Check
         document.getElementById('btn-back-p2').addEventListener('click', function() { 
-            // Back logic depends on where we came from
-            if(state.scope === 'replace_same') {
-                showStep('stepP1_Age');
-            } else {
-                showStep('stepP1');
-            }
+            if(state.scope === 'replace_same') showStep('stepP1_Age'); else showStep('stepP1_Complex');
         });
         document.getElementById('btn-next-p2').addEventListener('click', function() {
             var el = document.querySelector('input[name="consent_status"]:checked');
-            if(!el) { alert("Please confirm consent status."); return; }
+            if(!el) { alert("Confirm status."); return; }
             state.consent_status = el.value;
-            calculatePlanningResults();
+            calculatePlanning();
         });
 
-        // E1 -> E2
+        // Execution Flow
         document.getElementById('btn-back-e1').addEventListener('click', function() { showStep('step0'); });
         document.getElementById('btn-next-e1').addEventListener('click', function() {
             var el = document.querySelector('input[name="variation"]:checked');
-            if(!el) { alert("Please answer variation question."); return; }
+            if(!el) { alert("Answer variation."); return; }
             state.variation = el.value;
+            showStep('stepE1_Discovery');
+        });
+
+        document.getElementById('btn-back-discovery').addEventListener('click', function() { showStep('stepE1'); });
+        document.getElementById('btn-next-discovery').addEventListener('click', function() {
+            var el = document.querySelector('input[name="discovery"]:checked');
+            if(!el) { alert("Answer discovery."); return; }
+            state.discovery = el.value;
             showStep('stepE2');
         });
 
-        // E2 -> E3
-        document.getElementById('btn-back-e2').addEventListener('click', function() { showStep('stepE1'); });
+        document.getElementById('btn-back-e2').addEventListener('click', function() { showStep('stepE1_Discovery'); });
         document.getElementById('btn-next-e2').addEventListener('click', function() {
             var el = document.querySelector('input[name="supervision"]:checked');
-            if(!el) { alert("Please answer supervision question."); return; }
+            if(!el) { alert("Answer supervision."); return; }
             state.supervision = el.value;
             showStep('stepE3');
         });
 
-        // E3 -> Results
         document.getElementById('btn-back-e3').addEventListener('click', function() { showStep('stepE2'); });
         document.getElementById('btn-next-e3').addEventListener('click', function() {
             var el = document.querySelector('input[name="completion"]:checked');
-            if(!el) { alert("Please answer completion question."); return; }
+            if(!el) { alert("Answer completion."); return; }
             state.completion = el.value;
-            calculateExecutionResults();
+            calculateExecution();
         });
 
-        // --- RENDER FUNCTIONS ---
-
+        // RENDER HELPERS
         function renderLegislation(keys) {
-            var container = document.getElementById('legislation-breakdown');
             var html = "";
-            
-            keys.forEach(function(key) {
-                var answerKey = state[key];
-                if(answerKey && explanations[key] && explanations[key][answerKey]) {
-                    var data = explanations[key][answerKey];
-                    var questionTitle = explanations[key].question;
-                    
-                    html += `<div class="leg-block">
-                        <div class="leg-question">${questionTitle}</div>
-                        <div class="leg-ref">${data.ref}</div>
-                        <div class="leg-explain">${data.text}</div>
-                    </div>`;
+            keys.forEach(function(k) {
+                var val = state[k];
+                if(val && explanations[k] && explanations[k][val]) {
+                    var d = explanations[k][val];
+                    html += `<div class="leg-block"><div class="leg-question">${explanations[k].question}</div><div class="leg-ref">${d.ref}</div><div class="leg-explain">${d.text}</div></div>`;
                 }
             });
-            container.innerHTML = html;
+            document.getElementById('legislation-breakdown').innerHTML = html;
         }
 
-        function calculatePlanningResults() {
-            showStep('stepResults');
+        // CALCULATE
+        function calculatePlanning() {
+            var reasons = [], warnings = [], isReq = false;
             var banner = document.getElementById('result-banner');
-            var list = document.getElementById('final-checklist');
-            var warnDiv = document.getElementById('warnings-section');
-            var reasons = [];
-            var warnings = [];
-            var isConsentReq = false;
 
-            // Consent Logic
-            if (state.scope === 'new' || state.scope === 'replace_change') {
-                isConsentReq = true;
-                reasons.push("<strong>Consent Required:</strong> New builds or design changes (e.g. removing parapets, <em>Newton [2023]</em>) are not exempt under Schedule 1.");
-            } else if (state.scope === 'replace_same' && state.age === 'young') {
-                isConsentReq = true;
-                reasons.push("<strong>Consent Required (Durability Failure):</strong> Even though it's 'Like-for-Like', the roof failed before 15 years. Schedule 1 does not apply to early failures.");
-            } else {
-                reasons.push("<strong>Likely Exempt:</strong> Like-for-like replacement on a roof >15 years old is usually Schedule 1 exempt.");
+            // Complex Triggers
+            if(state.complex === 'gutter') {
+                isReq = true;
+                reasons.push("<strong>Consent Required:</strong> Changing Internal to External gutters changes the drainage system design (E1). This is rarely exempt.");
+            }
+            if(state.complex === 'skillion') {
+                warnings.push('<div class="tech-alert"><div class="box-title">Skillion Roof Risk</div>Re-roofing a skillion without ventilation can cause condensation. Adding vents is a design change (Consent needed).</div>');
             }
 
-            // Warning Logic
-            if (state.consent_status === 'no_check' && isConsentReq) {
-                warnings.push('<div class="case-study-box"><div class="box-title">DANGER: Unconsented Work</div>You indicated you haven\'t checked for a consent. In <em>Corbett-Pearson [2024]</em>, the Board ruled the LBP is responsible for checking consent status before starting. Do not start work until verified.</div>');
-            }
+            // Scope Triggers
+            if (state.scope === 'new' || state.scope === 'replace_change') isReq = true;
+            else if (state.scope === 'replace_same' && state.age === 'young') isReq = true;
 
-            // Banner
-            if(isConsentReq) {
+            // Display
+            if(isReq) {
                 banner.className = "result-banner res-consent";
                 banner.innerHTML = "<h1>CONSENT & LBP REQUIRED</h1>";
-                reasons.push("<strong>LBP Required:</strong> This is Restricted Building Work (RBW).");
+                reasons.push("<strong>LBP Required:</strong> Restricted Building Work.");
             } else {
                 banner.className = "result-banner res-exempt";
                 banner.innerHTML = "<h1>LIKELY EXEMPT</h1>";
-                reasons.push("<strong>No LBP Mandate:</strong> Exempt work is technically not RBW.");
+                reasons.push("<strong>No LBP Mandate:</strong> (But recommended).");
             }
 
-            list.innerHTML = reasons.map(function(r) { return "<li>" + r + "</li>"; }).join('');
-            warnDiv.innerHTML = warnings.join('');
-            
-            // Render Bottom Section (Added Age to keys)
-            renderLegislation(['scope', 'age', 'consent_status']);
+            if(state.consent_status === 'no_check' && isReq) {
+                warnings.push('<div class="case-study-box"><div class="box-title">DANGER</div>Failing to check for consent is negligence (<em>Corbett-Pearson</em>).</div>');
+            }
+
+            document.getElementById('final-checklist').innerHTML = reasons.map(r=>"<li>"+r+"</li>").join('');
+            document.getElementById('warnings-section').innerHTML = warnings.join('');
+            renderLegislation(['scope', 'complex', 'age', 'consent_status']);
+            showStep('stepResults');
         }
 
-        function calculateExecutionResults() {
-            showStep('stepResults');
+        function calculateExecution() {
+            var reasons = [], warnings = [];
             var banner = document.getElementById('result-banner');
-            var list = document.getElementById('final-checklist');
-            var warnDiv = document.getElementById('warnings-section');
-            var reasons = [];
-            var warnings = [];
-
             banner.className = "result-banner res-consent";
             banner.innerHTML = "<h1>EXECUTION ADVICE</h1>";
 
-            if (state.variation === 'yes') {
-                warnings.push('<div class="case-study-box"><div class="box-title">STOP: Unapproved Variation</div>You indicated you are deviating from the plans. In <em>Langdon [2025]</em>, a roofer was fined for using a "better" method without approval. In <em>Smith [2023]</em>, a roofer was fined for changing flashings at client request. <strong>You must get a Minor Variation from Council first.</strong></div>');
-                reasons.push("<strong>Action:</strong> Apply for a Minor Variation (Form 45A) immediately.");
+            if(state.variation === 'yes') {
+                warnings.push('<div class="case-study-box"><div class="box-title">STOP: Variation</div>Apply for Minor Variation (Form 45A) immediately. Unapproved changes = Fines (<em>Langdon</em>).</div>');
             }
 
-            if (state.supervision === 'remote') {
-                warnings.push('<div class="case-study-box"><div class="box-title">Supervision Failure Risk</div>In <em>Horrack [2024]</em>, an LBP was fined for remote supervision without physical checks. You cannot just "trust" the team. You must inspect the work.</div>');
-                reasons.push("<strong>Action:</strong> Schedule a physical site inspection immediately.");
+            if(state.discovery === 'structural') {
+                reasons.push("<strong>Structural Finding:</strong> Replacing substrate/purlins is RBW. New work MUST meet current code (s112).");
             }
 
-            if (state.completion === 'dispute') {
-                warnings.push('<div class="case-study-box"><div class="box-title">DO NOT WITHHOLD RECORDS</div>In <em>Moyes [2025]</em> and <em>Williams [2024]</em>, LBPs were fined for withholding Records of Work due to non-payment. The RoW is a statutory duty, not a negotiation tool.</div>');
-                reasons.push("<strong>Action:</strong> Issue the Record of Work immediately, regardless of payment status.");
-            }
-            else if (state.completion === 'terminated') {
-                reasons.push("<strong>Action:</strong> Issue a Record of Work for the work you DID complete.");
-                reasons.push("<strong>Note:</strong> See <em>McKinstry [2023]</em> - 'Completion' means when your contract ended.");
+            if(state.supervision === 'remote') {
+                warnings.push('<div class="case-study-box"><div class="box-title">Supervision Risk</div>Remote supervision requires physical inspection (<em>Horrack</em>).</div>');
             }
 
-            reasons.push("<strong>General Advice:</strong> Ensure the RoW goes to the <strong>Homeowner</strong> and <strong>Council</strong>. Giving it to the Builder is not enough (<em>Wei Chen [2025]</em>).");
+            if(state.completion === 'dispute') {
+                warnings.push('<div class="case-study-box"><div class="box-title">Issue RoW Now</div>Do not withhold RoW for payment (<em>Moyes</em>).</div>');
+            } else if(state.completion === 'terminated') {
+                reasons.push("<strong>Action:</strong> Issue RoW for work done so far.");
+            }
 
-            list.innerHTML = reasons.map(function(r) { return "<li>" + r + "</li>"; }).join('');
-            warnDiv.innerHTML = warnings.join('');
+            reasons.push("<strong>General:</strong> Send RoW to Owner AND Council.");
 
-            // Render Bottom Section
-            renderLegislation(['variation', 'supervision', 'completion']);
+            document.getElementById('final-checklist').innerHTML = reasons.map(r=>"<li>"+r+"</li>").join('');
+            document.getElementById('warnings-section').innerHTML = warnings.join('');
+            renderLegislation(['variation', 'discovery', 'supervision', 'completion']);
+            showStep('stepResults');
         }
-
     });
 </script>
 

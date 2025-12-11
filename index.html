@@ -21,10 +21,11 @@
             color: var(--ranz-charcoal);
             margin: 0;
             padding: 0;
-            line-height: 1.6;
+            line-height: 1.5; /* Reduced from 1.6 */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            font-size: 15px; /* Slightly smaller base font */
         }
 
         /* --- HEADER --- */
@@ -33,8 +34,8 @@
             color: white;
             position: relative;
             overflow: hidden;
-            height: 220px;
-            padding-top: 2rem;
+            height: 160px; /* Reduced from 220px */
+            padding-top: 1.5rem;
         }
 
         .header-content {
@@ -42,7 +43,7 @@
             z-index: 2;
             max-width: 900px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1.5rem;
         }
 
         .diagonal-accent {
@@ -61,22 +62,22 @@
             font-weight: 800;
             text-transform: uppercase;
             margin: 0;
-            font-size: 2rem;
+            font-size: 1.6rem; /* Reduced from 2rem */
             letter-spacing: 1px;
         }
 
         .subtitle {
             font-weight: 300;
-            font-size: 1rem;
-            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
             opacity: 0.9;
-            max-width: 60%;
+            max-width: 70%;
         }
 
         /* --- CONTAINER --- */
         .container {
             max-width: 900px;
-            margin: -50px auto 2rem;
+            margin: -30px auto 2rem; /* Pulled up less */
             position: relative;
             z-index: 3;
             padding: 0 1rem;
@@ -85,11 +86,11 @@
 
         .card {
             background: white;
-            border-top: 5px solid var(--ranz-red);
+            border-top: 4px solid var(--ranz-red);
             border-radius: 4px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            padding: 2.5rem;
-            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            padding: 1.5rem 2rem; /* Reduced padding significantly */
+            margin-bottom: 1.5rem;
             display: none;
         }
 
@@ -103,19 +104,19 @@
         h2 {
             color: var(--ranz-blue);
             font-weight: 800;
-            font-size: 1.4rem;
+            font-size: 1.3rem; /* Reduced size */
             margin-top: 0;
             border-bottom: 1px solid #eee;
-            padding-bottom: 1rem;
-            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
         }
 
         /* --- BOX STYLES --- */
         .info-box, .warning-box, .case-study-box, .intro-box, .tech-alert {
-            padding: 1.5rem;
+            padding: 1rem; /* Compact padding */
             border-radius: 4px;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
         }
 
         .intro-box { background-color: white; border: 1px solid #eee; border-left: 5px solid var(--ranz-charcoal); }
@@ -128,22 +129,22 @@
             font-weight: 800;
             display: flex;
             align-items: center;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             text-transform: uppercase;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
         .case-study-box .box-title::before { content: "⚖️ CASE LAW ALERT: "; margin-right: 5px; }
         .tech-alert .box-title::before { content: "🛠️ TECHNICAL ALERT: "; margin-right: 5px; }
 
         /* --- INPUTS --- */
-        .option-group { display: grid; gap: 1rem; }
+        .option-group { display: grid; gap: 0.8rem; } /* Tighter gap */
 
         .radio-label {
             display: block;
-            padding: 1.5rem;
-            border: 2px solid #e9ecef;
-            border-radius: 6px;
+            padding: 1rem; /* Reduced padding */
+            border: 1px solid #e0e0e0; /* Thinner border */
+            border-radius: 5px;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -156,19 +157,19 @@
             box-shadow: 0 0 0 1px var(--ranz-blue);
         }
 
-        .option-title { font-weight: 700; display: block; margin-bottom: 5px; }
-        .option-desc { font-weight: 300; font-size: 0.9rem; color: #666; }
+        .option-title { font-weight: 700; display: block; margin-bottom: 3px; font-size: 0.95rem; }
+        .option-desc { font-weight: 300; font-size: 0.85rem; color: #666; }
 
         /* --- BUTTONS --- */
-        .actions { margin-top: 2rem; display: flex; gap: 1rem; }
+        .actions { margin-top: 1.5rem; display: flex; gap: 1rem; }
         .btn {
-            padding: 1rem 2rem;
+            padding: 0.8rem 1.5rem; /* Smaller buttons */
             border: none;
             border-radius: 4px;
             font-weight: 700;
             text-transform: uppercase;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             flex: 1;
         }
         .btn-next { background-color: var(--ranz-blue); color: white; }
@@ -179,42 +180,42 @@
         .btn-back:hover { background-color: #dbe2e8; }
 
         /* --- RESULTS --- */
-        .result-banner { text-align: center; padding: 2rem; color: white; border-radius: 6px; margin-bottom: 2rem; }
+        .result-banner { text-align: center; padding: 1.5rem; color: white; border-radius: 6px; margin-bottom: 1.5rem; }
         .res-consent { background-color: var(--ranz-red); }
         .res-exempt { background-color: #28a745; }
-        .checklist li { margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #eee; }
-        footer { text-align: center; padding: 2rem; font-size: 0.8rem; color: #888; }
+        .checklist li { margin-bottom: 0.8rem; padding-bottom: 0.8rem; border-bottom: 1px solid #eee; }
+        footer { text-align: center; padding: 1.5rem; font-size: 0.75rem; color: #888; }
         
         /* Terms Box */
         .terms-container {
             background-color: #f9f9f9;
             border: 1px solid #ddd;
-            padding: 1rem;
-            font-size: 0.85rem;
+            padding: 0.8rem;
+            font-size: 0.8rem;
             color: #555;
-            height: 150px;
+            height: 120px; /* Reduced height */
             overflow-y: auto;
             margin-bottom: 1rem;
             border-radius: 4px;
         }
         .terms-check-wrapper {
-            display: flex; align-items: center; margin-bottom: 1.5rem; padding: 1rem; background: #eef4f8; border-radius: 4px;
+            display: flex; align-items: center; margin-bottom: 1.2rem; padding: 0.8rem; background: #eef4f8; border-radius: 4px; font-size: 0.85rem;
         }
-        .terms-check-wrapper input { width: 20px; height: 20px; margin-right: 10px; display: block; }
+        .terms-check-wrapper input { width: 18px; height: 18px; margin-right: 10px; display: block; }
 
         /* --- LEGISLATION BREAKDOWN --- */
         .leg-block {
             border: 1px solid #e0e0e0;
-            border-left: 5px solid var(--ranz-charcoal);
-            padding: 1.2rem;
-            margin-bottom: 1.2rem;
+            border-left: 4px solid var(--ranz-charcoal);
+            padding: 1rem;
+            margin-bottom: 1rem;
             border-radius: 4px;
             background: #ffffff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
-        .leg-question { font-weight: 800; color: var(--ranz-blue); margin-bottom: 0.5rem; font-size: 0.9rem; text-transform: uppercase; border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        .leg-ref { font-weight: 700; color: var(--ranz-red); font-size: 0.95rem; margin-bottom: 0.5rem; display: block; }
-        .leg-explain { font-size: 0.9rem; color: #444; line-height: 1.5; }
+        .leg-question { font-weight: 800; color: var(--ranz-blue); margin-bottom: 0.4rem; font-size: 0.85rem; text-transform: uppercase; border-bottom: 1px solid #eee; padding-bottom: 4px; }
+        .leg-ref { font-weight: 700; color: var(--ranz-red); font-size: 0.9rem; margin-bottom: 0.4rem; display: block; }
+        .leg-explain { font-size: 0.85rem; color: #444; line-height: 1.4; }
     </style>
 </head>
 <body>
@@ -406,11 +407,11 @@
         <div id="result-banner" class="result-banner"></div>
         <h3>Critical Compliance Checklist:</h3>
         <ul class="checklist" id="final-checklist"></ul>
-        <div id="warnings-section" style="margin-top: 2rem;"></div>
+        <div id="warnings-section" style="margin-top: 1.5rem;"></div>
         
-        <div style="margin-top: 3rem; border-top: 2px solid #eee; padding-top: 2rem;">
+        <div style="margin-top: 2rem; border-top: 1px solid #eee; padding-top: 1.5rem;">
             <h3>Legislation & Rules Breakdown</h3>
-            <p style="margin-bottom:1rem; font-size:0.9rem; color:#666;">Detailed reference for the logic applied to your assessment.</p>
+            <p style="margin-bottom:1rem; font-size:0.85rem; color:#666;">Detailed reference for the logic applied to your assessment.</p>
             <div id="legislation-breakdown"></div>
         </div>
 
@@ -613,7 +614,7 @@
                 var val = state[k];
                 if(val && explanations[k] && explanations[k][val]) {
                     var d = explanations[k][val];
-                    html += `<div class="leg-block"><div class="leg-question">${explanations[k].question}</div><div class="leg-ref">${d.ref}</div><div class="leg-explain">${d.text}</div></div>`;
+                    html += '<div class="leg-block"><div class="leg-question">'+explanations[k].question+'</div><div class="leg-ref">'+d.ref+'</div><div class="leg-explain">'+d.text+'</div></div>';
                 }
             });
             document.getElementById('legislation-breakdown').innerHTML = html;

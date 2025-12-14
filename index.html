@@ -75,7 +75,7 @@
         /* --- MAIN CONTAINER --- */
         .container {
             max-width: 800px;
-            margin: -30px auto 2rem;
+            margin: -30px auto 2rem; /* Overlap header */
             position: relative;
             z-index: 3;
             padding: 0 1rem;
@@ -360,10 +360,10 @@
             In <em>Langdon [2025]</em>, a roofer was fined for using a "better" method without approval.
             <div class="citation">Langdon [2025] BPB 26658</div>
         </div>
-        <p><strong>Are you deviating from the Plans?</strong></p>
+        <p><strong>Are you deviating from the Plans or altering an existing configuration?</strong></p>
         <div class="option-group">
-            <label><input type="radio" name="variation" value="yes"><div class="radio-label"><span class="option-title">Yes</span><span class="option-desc">Changing flashings, profiles, or details.</span></div></label>
-            <label><input type="radio" name="variation" value="no"><div class="radio-label"><span class="option-title">No</span></div></label>
+            <label><input type="radio" name="variation" value="yes"><div class="radio-label"><span class="option-title">Yes</span><span class="option-desc">Changing flashings, profiles, details, pitch, or drainage layout (e.g. internal to external gutters).</span></div></label>
+            <label><input type="radio" name="variation" value="no"><div class="radio-label"><span class="option-title">No</span><span class="option-desc">Following the consented plans or original design exactly.</span></div></label>
         </div>
         <div class="actions">
             <button class="btn btn-back" id="btn-back-e1">Back</button>
@@ -435,11 +435,14 @@
         
         <div class="leg-breakdown-area">
             <h3>Legislation & Rules Breakdown</h3>
-            <p style="margin-bottom:1rem; font-size:0.85rem; color:#666;">Detailed reference for the logic applied to your assessment.</p>
+            <p style="margin-bottom:1rem; font-size:0.9rem; color:#666;">Detailed reference for the logic applied to your assessment.</p>
             <div id="legislation-breakdown"></div>
         </div>
 
-        <button class="btn btn-back" style="width:100%; margin-top:2rem; background:#333; color:white;" onclick="location.reload()">Start New Assessment</button>
+        <div class="actions" style="grid-template-columns: 1fr 1fr;">
+            <button class="btn btn-back" id="btn-back-results">Back</button>
+            <button class="btn btn-next" onclick="location.reload()">Start New Assessment</button>
+        </div>
     </div>
 
 </div>
@@ -497,7 +500,7 @@
                 question: "Supervision Requirements",
                 self: { ref: "LBP Rules", text: "Direct accountability." },
                 check: { ref: "Building Act 2004, Section 7", text: "Meets definition of 'direction and oversight'." },
-                remote: { ref: "Horrack [2024] BPB 26456", text: "<strong>Supervision Definition:</strong> The Board ruled that 'Remote supervision does not mean NO supervision'. A supervisor must have knowledge of the work and carry out actual inspections." }
+                remote: { ref: "Horrack [2024] BPB 26456", text: "<strong>Supervision Definition:</strong> The Board ruled that 'Remote supervision does not mean NO supervision'. A supervisor must have knowledge of the work and carry out actual inspections. Relying solely on trust is insufficient." }
             },
             completion: {
                 question: "Completion & Record of Work",
@@ -577,6 +580,15 @@
             state.completion = document.querySelector('input[name="completion"]:checked')?.value;
             if(!state.completion) return alert("Answer completion");
             calcExecution();
+        });
+
+        // RESULTS BACK BUTTON HANDLER
+        document.getElementById('btn-back-results').addEventListener('click', () => {
+            if (state.pathway === 'planning') {
+                showStep('stepP2');
+            } else {
+                showStep('stepE3');
+            }
         });
 
         function renderLeg(keys) {

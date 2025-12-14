@@ -693,6 +693,7 @@
             // Add warnings for all selected risks
             if(state.complex.includes('solar')) warnings.push('<div class="tech-alert"><span class="box-title">Solar Risk</span>Verify structural load capacity (B1).</div>');
             if(state.complex.includes('asbestos')) warnings.push('<div class="tech-alert"><span class="box-title">Asbestos Risk</span>Stop work. Survey required.</div>');
+            if(state.complex.includes('skillion')) warnings.push('<div class="tech-alert"><span class="box-title">Ventilation Check</span>Skillion roofs require specific ventilation to prevent condensation (H1/E3).</div>');
 
             if(state.consent_status==='no_check' && isReq) warnings.push('<div class="case-study-box"><span class="box-title">Danger</span>Failing to check for consent is negligence (<em>Corbett-Pearson</em>). Verify now.</div>');
             if(state.consent_status==='emergency') reasons.push("<strong>Action:</strong> Apply for Certificate of Acceptance (s42) immediately.");
@@ -760,9 +761,9 @@
                 reasons.push("<strong>General:</strong> Send RoW to Owner AND Council.");
             }
 
-            list.innerHTML = reasons.map(r => "<li>"+r+"</li>").join('');
-            warnDiv.innerHTML = warnings.join('');
-            renderLegislation(['b_type', 'variation', 'discovery', 'licence', 'supervision', 'completion']);
+           document.getElementById('final-checklist').innerHTML = reasons.map(r => "<li>"+r+"</li>").join('');
+document.getElementById('warnings-section').innerHTML = warnings.join('');
+renderLeg(['b_type', 'variation', 'discovery', 'licence', 'supervision', 'completion']);
             showStep('stepResults');
         }
     });
@@ -770,3 +771,4 @@
 
 </body>
 </html>
+

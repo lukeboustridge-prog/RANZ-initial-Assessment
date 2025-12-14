@@ -701,9 +701,14 @@
                 warnings.push('<div class="tech-alert"><span class="box-title">Asbestos & The Law (Education)</span><strong>The Rule:</strong> Under the Health & Safety at Work Act, any building constructed pre-2000 is <em>presumed</em> to contain asbestos until proven otherwise.<br><br><strong>Risk:</strong> You generally cannot disturb materials (like soffits, decramastic tiles, or fibro) without a negative test. Fines for site contamination are severe.</div>');
             }
             
-            // SKILLION UPDATE
+            // 1. COMBINED RISK CHECK (High Priority)
+            if(state.complex.includes('skillion') && state.complex.includes('h1_upgrade')) {
+                 warnings.push('<div class="warning-box" style="border-left: 5px solid #d9534f; background-color: #fff5f5; color: #a71d2a;"><span class="box-title" style="color: #a71d2a;">⚠️ DOUBLE RISK: Skillion + Insulation Upgrade</span><strong>The Conflict:</strong> You are combining two high-risk factors. Fitting thick H1 insulation (R6.6) into a shallow skillion roof often blocks the critical 25mm ventilation gap.<br><br><strong>Risk:</strong> If you compress the insulation, you lose thermal performance. If you block the gap, you trap moisture (mould risk).<br><strong>Advice:</strong> You may need to raise the roof height (Consent required) or use specialised high-density insulation boards to maintain the air gap.</div>');
+            }
+
+            // 2. SKILLION VENTILATION (Generic/Educational)
             if(state.complex.includes('skillion')) {
-                warnings.push('<div class="tech-alert"><span class="box-title">Skillion Ventilation (Recommended)</span><strong>The Issue:</strong> Skillion roofs lack a large cavity to buffer moisture. Horizontal purlins often block the 25mm air gap, acting as a "dam" for stagnant, moist air.<br><br><strong>The Fix (Passive System):</strong> Ensure <strong>continuous airflow</strong> using:<br>1. <strong>Inlet Vents</strong> (Fascia) to let air in.<br>2. <strong>Vented Battens</strong> (over purlins) to ensure air can travel <em>through</em> the roof structure.<br>3. <strong>Ridge Vents</strong> to let warm air escape.<br><em>(See systems like VentNZ for compliant solutions).</em></div>');
+                warnings.push('<div class="tech-alert"><span class="box-title">Skillion Ventilation (Education)</span><strong>The Physics:</strong> Skillion roofs lack a large roof cavity to buffer moisture. Horizontal purlins often block the 25mm air gap, acting as a "dam" for stagnant, moist air.<br><br><strong>Design Options:</strong> To achieve continuous airflow, a mix of these options should be considered:<br>&bull; <strong>Inlet Vents</strong> (Fascia/Eaves) to admit air.<br>&bull; <strong>Vented Battens</strong> (over purlins) to allow air travel <em>over</em> structure.<br>&bull; <strong>Ridge Vents</strong> to extract warm air.</div>');
             }
 
             if(state.complex.includes('gutter')) {

@@ -701,8 +701,9 @@
                 warnings.push('<div class="tech-alert"><span class="box-title">Asbestos & The Law (Education)</span><strong>The Rule:</strong> Under the Health & Safety at Work Act, any building constructed pre-2000 is <em>presumed</em> to contain asbestos until proven otherwise.<br><br><strong>Risk:</strong> You generally cannot disturb materials (like soffits, decramastic tiles, or fibro) without a negative test. Fines for site contamination are severe.</div>');
             }
             
+            // SKILLION UPDATE
             if(state.complex.includes('skillion')) {
-                warnings.push('<div class="tech-alert"><span class="box-title">Skillion Ventilation (Education)</span><strong>The Physics:</strong> Skillion roofs lack a large roof cavity for air circulation. If warm, moist air from the house gets in, it gets trapped and condenses on the cold roofing iron.<br><br><strong>The Fix:</strong> Building Code (E3/H1) typically requires a 25mm continuous air gap between the insulation and the underlay to allow this moisture to escape.</div>');
+                warnings.push('<div class="tech-alert"><span class="box-title">Skillion Ventilation (Recommended)</span><strong>The Issue:</strong> Skillion roofs lack a large cavity to buffer moisture. Horizontal purlins often block the 25mm air gap, acting as a "dam" for stagnant, moist air.<br><br><strong>The Fix (Passive System):</strong> Ensure <strong>continuous airflow</strong> using:<br>1. <strong>Inlet Vents</strong> (Fascia) to let air in.<br>2. <strong>Vented Battens</strong> (over purlins) to ensure air can travel <em>through</em> the roof structure.<br>3. <strong>Ridge Vents</strong> to let warm air escape.<br><em>(See systems like VentNZ for compliant solutions).</em></div>');
             }
 
             if(state.complex.includes('gutter')) {
@@ -791,4 +792,3 @@
 
 </body>
 </html>
-
